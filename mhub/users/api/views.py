@@ -9,7 +9,7 @@ class RegistrationView(APIView):
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['response'] = 'successfully registered new user.'
+            data['response'] = 'Successfully registered new user.'
             data['email'] = account.email
             data['username'] = account.username
         else:
