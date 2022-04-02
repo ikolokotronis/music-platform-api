@@ -1,6 +1,8 @@
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from posts.models import Post
+from users.models import Account
 from .serializers import PostSerializer
 
 
@@ -23,11 +25,17 @@ class PostView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = PostSerializer(data=request.data)
+
+        account = Account.objects.get(id=1)
+
+        post = Post(author=account)
+
+        serializer = PostSerializer(post, data=request.data)
+
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PostDetailView(APIView):
@@ -35,7 +43,7 @@ class PostDetailView(APIView):
         try:
             return Post.objects.get(pk=pk)
         except Post.DoesNotExist:
-            return Response(status=404)
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     def get(self, request, pk):
         post = self.get_object(pk)
@@ -47,10 +55,15 @@ class PostDetailView(APIView):
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         post = self.get_object(pk)
-        post.delete()
-        return Response(status=204)
+        operation = post.delete()
+        data = {}
+        if operation:
+            data['success'] = 'Delete successful'
+            return Response(data=data, status=status.HTTP_200_OK)
+        data['error'] = 'Delete failed'
+        return Response(data=data, status=status.HTTP_204_NO_CONTENT)
