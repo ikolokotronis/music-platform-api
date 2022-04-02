@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import Api_Overview
+from posts.api.views import Api_Overview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Api_Overview.as_view(), name="api-overview"),
-    path('posts/', include('posts.urls')),
-    path('users/', include('users.urls')),
+    path('posts/', include('posts.api.urls')),
+    path('users/', include('users.api.urls')),
 ]
