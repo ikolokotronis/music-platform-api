@@ -4,7 +4,13 @@ from posts.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+
+    username = serializers.SerializerMethodField('get_username_from_author')
+
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['title', 'content', 'username', 'created_at', 'updated_at']
+
+    def get_username_from_author(self, post):
+        return post.author.username
 

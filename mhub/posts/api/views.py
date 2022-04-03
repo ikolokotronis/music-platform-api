@@ -26,12 +26,10 @@ class PostView(APIView):
 
     def post(self, request):
 
-        account = Account.objects.get(id=1)
+        account = Account.objects.get(id=6)
 
         post = Post(author=account)
-
         serializer = PostSerializer(post, data=request.data)
-
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
