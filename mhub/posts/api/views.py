@@ -1,6 +1,8 @@
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 from posts.models import Post
 from users.models import Account
 from .serializers import PostSerializer
@@ -25,8 +27,9 @@ class PostView(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-
-        account = Account.objects.get(id=6)
+        authentication_classes = [TokenAuthentication]
+        permission_classes = [IsAuthenticated]
+        account = request.user
 
         post = Post(author=account)
         serializer = PostSerializer(post, data=request.data)
@@ -50,6 +53,10 @@ class PostDetailView(APIView):
 
     def put(self, request, pk):
         post = self.get_object(pk)
+
+        if post.author != request.user:
+            return Response({'Access forbidden'}, status=status.HTTP_403_FORBIDDEN)
+
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -58,6 +65,10 @@ class PostDetailView(APIView):
 
     def delete(self, request, pk):
         post = self.get_object(pk)
+
+        if post.author != request.user:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         operation = post.delete()
         data = {}
         if operation:
