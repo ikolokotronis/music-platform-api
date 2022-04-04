@@ -11,6 +11,9 @@ from users.models import Account
 
 class RegistrationView(APIView):
     def post(self, request):
+        """
+        Creates a new user.
+        """
         serializer = RegistrationSerializer(data=request.data)
         data = {}
         if serializer.is_valid():
@@ -30,7 +33,9 @@ class AccountView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
-        # get the account information
+        """
+        Get the account information
+        """
         try:
             user = Account.objects.get(pk=pk)
         except Account.DoesNotExist:
@@ -39,7 +44,9 @@ class AccountView(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk):
-        # update the account information
+        """
+        Update the account information
+        """
         try:
             user = request.user
         except Account.DoesNotExist:

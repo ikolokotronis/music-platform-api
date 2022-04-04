@@ -5,11 +5,11 @@ from tracks.models import Track
 
 class TrackSerializer(serializers.ModelSerializer):
 
-    username = serializers.SerializerMethodField('get_username_from_author')
+    username = serializers.SerializerMethodField('get_username_from_user')
 
     class Meta:
         model = Track
-        fields = ['name', 'description', 'username', 'audio_file', 'created_at', 'updated_at']
+        fields = ['pk', 'name', 'description', 'username', 'audio_file', 'created_at', 'updated_at']
 
-    def get_username_from_author(self, track):
+    def get_username_from_user(self, track):
         return track.user.username

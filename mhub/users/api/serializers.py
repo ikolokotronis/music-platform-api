@@ -3,6 +3,9 @@ from users.models import Account
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    """
+    Serializers registration requests and creates a new user.
+    """
 
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 
@@ -14,6 +17,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
         }
 
     def save(self):
+        """
+        Save method to create a new user.
+        :return:
+        """
         account = Account(
             email=self.validated_data['email'],
             username=self.validated_data['username'],
@@ -29,6 +36,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class AccountPropertiesSerializer(serializers.ModelSerializer):
+    """
+    Serializes the properties of an account.
+    """
 
     new_password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
 

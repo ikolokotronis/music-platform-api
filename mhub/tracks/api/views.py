@@ -15,12 +15,19 @@ class TrackList(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        """
+        Lists all tracks.
+        :param request:
+        :return:
+        """
         tracks = Track.objects.all()
         serializer = TrackSerializer(tracks, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-
+        """
+        Creates a new track.
+        """
         track = Track(user=request.user)
 
         serializer = TrackSerializer(track, data=request.data)
@@ -38,17 +45,26 @@ class TrackDetail(APIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
+        """
+        Retrieve the track instance.
+        """
         try:
             return Track.objects.get(pk=pk)
         except Track.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     def get(self, request, pk):
+        """
+        Lists a track.
+        """
         track = self.get_object(pk)
         serializer = TrackSerializer(track)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
+        """
+        Updates a track.
+        """
         track = self.get_object(pk)
 
         if track.user != request.user:
@@ -61,6 +77,9 @@ class TrackDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
+        """
+        Deletes a track.
+        """
         track = self.get_object(pk)
 
         if track.user != request.user:
