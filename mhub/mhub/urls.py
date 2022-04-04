@@ -18,11 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from posts.api.views import Api_Overview
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Api_Overview.as_view(), name="api-overview"),
     path('posts/', include('posts.api.urls')),
     path('users/', include('users.api.urls')),
     path('tracks/', include('tracks.api.urls')),

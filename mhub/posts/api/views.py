@@ -8,18 +8,6 @@ from users.models import Account
 from .serializers import PostSerializer
 
 
-class Api_Overview(APIView):
-    def get(self, request):
-        api_urls = {
-            'All posts': 'GET /posts/',
-            'Create post': 'POST /posts/',
-            'View post': 'GET /posts/<str:pk>/',
-            'Update post': 'POST /posts/<str:pk>/',
-            'Delete post': 'DELETE /posts/<str:pk>/',
-        }
-        return Response(api_urls)
-
-
 class PostView(APIView):
     def get(self, request):
         queryset = Post.objects.all()
