@@ -21,7 +21,7 @@ class TrackList(APIView):
 
     def post(self, request):
 
-        track = Track(artist=request.user)
+        track = Track(user=request.user)
 
         serializer = TrackSerializer(track, data=request.data)
         if serializer.is_valid():
