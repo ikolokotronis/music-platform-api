@@ -4,6 +4,9 @@ from tracks.models import Track
 
 
 class TrackSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Track model
+    """
 
     username = serializers.SerializerMethodField('get_username_from_user')
 

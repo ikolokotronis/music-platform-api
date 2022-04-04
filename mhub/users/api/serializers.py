@@ -4,7 +4,7 @@ from users.models import Account
 
 class RegistrationSerializer(serializers.ModelSerializer):
     """
-    Serializers registration requests and creates a new user.
+    Serializes registration requests and creates a new user.
     """
 
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
