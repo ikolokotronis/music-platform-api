@@ -29,29 +29,33 @@ class AccountView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    def get(self, request, pk):
         # get the account information
         try:
-            account = request.user
+            user = Account.objects.get(pk=pk)
         except Account.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = AccountPropertiesSerializer(account)
+            return Response({"Account with this pk doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        serializer = AccountPropertiesSerializer(user)
         return Response(serializer.data)
 
-    def put(self, request):
+    def put(self, request, pk):
         # update the account information
         try:
-            account = request.user
+            user = request.user
         except Account.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = AccountPropertiesSerializer(account, data=request.data)
+        user_from_url = Account.objects.get(pk=pk)
+        if user_from_url != request.user:
+            return Response({'Access forbidden'}, status=status.HTTP_403_FORBIDDEN)
+
+        serializer = AccountPropertiesSerializer(user, data=request.data)
         data = {}
         if serializer.is_valid():
             serializer.save()
             new_password = serializer.validated_data['new_password']
             if new_password != '':
-                account.set_password(new_password)
-                account.save()
+                user.set_password(new_password)
+                user.save()
             data['response'] = 'Account update success.'
             return Response(data=data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

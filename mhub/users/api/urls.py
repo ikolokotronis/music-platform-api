@@ -10,6 +10,6 @@ app_name = 'users'
 
 urlpatterns = [
     path('login/', obtain_auth_token, name='login'),
-    path('properties/', AccountView.as_view(), name='properties'),
+    path('properties/<int:pk>/', AccountView.as_view(), name='properties'),
     path('register/', RegistrationView.as_view(), name='register'),
 ]
