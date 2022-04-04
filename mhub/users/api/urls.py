@@ -3,11 +3,13 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 from users.api.views import (
     RegistrationView,
+    AccountView
 )
 
 app_name = 'users'
 
 urlpatterns = [
-    path('register/', RegistrationView.as_view(), name='register'),
     path('login/', obtain_auth_token, name='login'),
+    path('properties/', AccountView.as_view(), name='properties'),
+    path('register/', RegistrationView.as_view(), name='register'),
 ]

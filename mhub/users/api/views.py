@@ -1,7 +1,12 @@
+from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from users.api.serializers import RegistrationSerializer
+from users.api.serializers import RegistrationSerializer, AccountPropertiesSerializer
 from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated
+
+from users.models import Account
 
 
 class RegistrationView(APIView):
@@ -18,3 +23,31 @@ class RegistrationView(APIView):
         else:
             data = serializer.errors
         return Response(data)
+
+
+class AccountView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # get the account information
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = AccountPropertiesSerializer(account)
+        return Response(serializer.data)
+
+    def put(self, request):
+        # update the account information
+        try:
+            account = request.user
+        except Account.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = AccountPropertiesSerializer(account, data=request.data)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+            data['response'] = 'Account update success.'
+            return Response(data=data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
