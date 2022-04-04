@@ -30,6 +30,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class AccountPropertiesSerializer(serializers.ModelSerializer):
 
+    new_password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+
     class Meta:
         model = Account
-        fields = ['pk', 'email', 'username', 'created_at']
+        fields = ['pk', 'email', 'username', 'new_password', 'created_at']

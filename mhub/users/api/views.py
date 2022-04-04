@@ -48,6 +48,10 @@ class AccountView(APIView):
         data = {}
         if serializer.is_valid():
             serializer.save()
+            new_password = serializer.validated_data['new_password']
+            if new_password != '':
+                account.set_password(new_password)
+                account.save()
             data['response'] = 'Account update success.'
             return Response(data=data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
