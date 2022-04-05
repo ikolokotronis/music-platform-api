@@ -34,6 +34,12 @@ class Track(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        """
+        Override save method to get the pk of the track instance
+        :param args:
+        :param kwargs:
+        :return:
+        """
         if self.pk is None:
             saved_audio_file = self.audio_file
             saved_img_file = self.img_file
