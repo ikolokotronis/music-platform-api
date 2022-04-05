@@ -1,5 +1,5 @@
 """
-ASGI config for mhub project.
+ASGI config for music-platform-api project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mhub.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'music-platform-api.settings')
 
 application = get_asgi_application()
