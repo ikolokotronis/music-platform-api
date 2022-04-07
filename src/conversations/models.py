@@ -5,6 +5,9 @@ from django.dispatch import receiver
 
 
 class Message(models.Model):
+    """
+    Message model
+    """
     content = models.CharField(max_length=500)
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sender', null=True)
     receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='receiver', null=True)
@@ -17,6 +20,9 @@ class Message(models.Model):
         return f'{self.pk} - {self.content}'
 
     def save(self, *args, **kwargs):
+        """
+        Override save method to set the conversation field
+        """
         super(Message, self).save(*args, **kwargs)
         for conversation in Conversation.objects.all():
             if self.sender in conversation.participants.all() and self.receiver in conversation.participants.all():
@@ -34,6 +40,9 @@ class Message(models.Model):
 
 
 class Conversation(models.Model):
+    """
+    Conversation model
+    """
     participants = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='participants', through='ConversationParticipant')
     messages = models.ManyToManyField(Message, related_name='messages', through='ConversationMessages')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,6 +53,9 @@ class Conversation(models.Model):
 
 
 class ConversationParticipant(models.Model):
+    """
+    ConversationParticipant model
+    """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='conversation_participant')
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='p_conversation')
 
@@ -52,6 +64,9 @@ class ConversationParticipant(models.Model):
 
 
 class ConversationMessages(models.Model):
+    """
+    ConversationMessages model
+    """
     message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='conversation_message')
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='m_conversation')
 
@@ -61,6 +76,9 @@ class ConversationMessages(models.Model):
 
 @receiver(post_save, sender=Message)
 def update_conversation(sender, instance, created, **kwargs):
+    """
+    Update conversation when a new message is created
+    """
 
     if created:
         for conversation in Conversation.objects.all():
