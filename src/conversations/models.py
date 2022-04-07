@@ -44,7 +44,7 @@ class Conversation(models.Model):
     Conversation model
     """
     participants = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='participants', through='ConversationParticipant')
-    messages = models.ManyToManyField(Message, related_name='messages', through='ConversationMessages')
+    messages = models.ManyToManyField(Message, related_name='messages', through='ConversationMessage')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -63,9 +63,9 @@ class ConversationParticipant(models.Model):
         return f'{self.user} - {self.conversation}'
 
 
-class ConversationMessages(models.Model):
+class ConversationMessage(models.Model):
     """
-    ConversationMessages model
+    ConversationMessage model
     """
     message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='conversation_message')
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='m_conversation')
