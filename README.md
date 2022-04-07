@@ -24,7 +24,19 @@ This is how to make the project run locally.
    ```sh
    pip install -r requirements.txt
    ```
-3. Run the server
+3. Enter your database settings in settings.py. Here is an example if you want to use PostgreSQL:
+   ```python
+   DATABASES = {
+    'default': {
+        'HOST': '127.0.0.1',
+        'NAME': 'db_name_here',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': 'user_name_here',
+        'PASSWORD': 'password_here',
+    }
+    }
+   ```   
+4. Run the server
    ```sh
    python manage.py runserver
    ```
