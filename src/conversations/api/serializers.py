@@ -26,11 +26,16 @@ class MessageSerializer(serializers.ModelSerializer):
 
     sender = serializers.SerializerMethodField('get_sender')
 
+    receiver = serializers.SerializerMethodField('get_receiver')
+
     class Meta:
         model = Message
         fields = ('pk', 'content', 'sender', 'receiver', 'conversation',  'created_at', 'updated_at')
 
     def get_sender(self, message):
         return AccountPropertiesSerializer(message.sender).data
+
+    def get_receiver(self, message):
+        return AccountPropertiesSerializer(message.receiver).data
 
 
