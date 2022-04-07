@@ -41,7 +41,6 @@ class MessageSender(APIView):
         if serializer.is_valid():
             serializer.validated_data['sender'] = request.user
             serializer.validated_data['receiver'] = Account.objects.get(id=request.data['receiver'])
-            serializer.validated_data['conversation'] = Conversation.objects.get(id=request.data['conversation'])
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
