@@ -17,7 +17,7 @@ class Message(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.pk} - {self.content}'
+        return f'Message nr {self.pk}: {self.content}'
 
     def save(self, *args, **kwargs):
         """
@@ -49,7 +49,7 @@ class Conversation(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.pk} - {self.participants.all()[0].username} and {self.participants.all()[1].username}'
+        return f'Conversation nr {self.pk}'
 
 
 class ConversationParticipant(models.Model):
@@ -71,7 +71,7 @@ class ConversationMessage(models.Model):
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name='m_conversation')
 
     def __str__(self):
-        return f'{self.message} - {self.conversation}'
+        return f'Conversation {self.conversation.pk} - Message {self.message.pk}'
 
 
 @receiver(post_save, sender=Message)

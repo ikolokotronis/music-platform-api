@@ -7,7 +7,7 @@ from .serializers import TrackSerializer
 from tracks.models import Track
 
 
-class TrackList(APIView):
+class TrackView(APIView):
     """
     List all tracks, or creates a new track.
     """
@@ -37,7 +37,7 @@ class TrackList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class TrackDetail(APIView):
+class TrackDetailView(APIView):
     """
     Retrieve, update or delete a track instance.
     """

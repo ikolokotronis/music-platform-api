@@ -17,7 +17,7 @@ class Account(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.username
+        return f'User {self.username} nr {self.pk}'
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

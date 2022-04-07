@@ -9,31 +9,33 @@ from conversations.models import Conversation, Message
 from users.models import Account
 
 
-class ConversationList(APIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+class ConversationView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        conversations = Conversation.objects.filter(
-            participants=request.user
-        ).order_by('-pk')
-        serializer = ConversationSerializer(conversations, many=True)
-        return Response(serializer.data)
+        conversations = Conversation.objects.filter(participants=request.user).order_by('-created_at')
+        if conversations:
+            serializer = ConversationSerializer(conversations, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response({'No conversations for this user'}, status=status.HTTP_404_NOT_FOUND)
 
 
-class ConversationDetail(APIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+class ConversationDetailView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, pk):
         conversation = Conversation.objects.get(pk=pk)
+        if request.user not in conversation.participants.all():
+            return Response({'You are not a participant of this conversation'}, status=status.HTTP_403_FORBIDDEN)
         serializer = ConversationSerializer(conversation)
         return Response(serializer.data)
 
 
 class MessageSender(APIView):
-    authentication_classes = (TokenAuthentication,)
-    permission_classes = (IsAuthenticated,)
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         message = Message(sender=request.user)

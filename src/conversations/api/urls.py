@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.urls import path
 
-from conversations.api.views import ConversationList, ConversationDetail, MessageSender
+from conversations.api.views import ConversationView, ConversationDetailView, MessageSender
 
 app_name = 'conversations'
 
 urlpatterns = [
-    path('', ConversationList.as_view(), name='conversations_list'),
-    path('<int:pk>/', ConversationDetail.as_view(), name='conversations_detail'),
+    path('', ConversationView.as_view(), name='conversations_list'),
+    path('<int:pk>/', ConversationDetailView.as_view(), name='conversations_detail'),
     path('send_message/', MessageSender.as_view(), name='send_message'),
 ]
 

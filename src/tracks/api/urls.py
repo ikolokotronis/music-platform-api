@@ -1,12 +1,11 @@
 from django.urls import path
-from posts.api import views
 from .views import (
-    TrackList, TrackDetail
+    TrackView, TrackDetailView
 )
 
 app_name = 'tracks'
 
 urlpatterns = [
-    path('', TrackList.as_view(), name='track-list'),
-    path('<int:pk>/', TrackDetail.as_view(), name='track-detail'),
+    path('', TrackView.as_view(), name='track-list'),
+    path('<int:pk>/', TrackDetailView.as_view(), name='track-detail'),
 ]
