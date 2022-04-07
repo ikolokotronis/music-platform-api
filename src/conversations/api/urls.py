@@ -13,19 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path
+
+from conversations.api.views import ConversationList, ConversationDetail, MessageSender
+
+app_name = 'conversations'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('posts/', include('posts.api.urls')),
-    path('users/', include('users.api.urls')),
-    path('tracks/', include('tracks.api.urls')),
-    path('conversations/', include('conversations.api.urls')),
+    path('', ConversationList.as_view(), name='conversations_list'),
+    path('<int:pk>/', ConversationDetail.as_view(), name='conversations_detail'),
+    path('send_message/', MessageSender.as_view(), name='send_message'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

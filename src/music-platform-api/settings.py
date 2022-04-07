@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'posts',
     'tracks',
+    'conversations',
 ]
 
 REST_FRAMEWORK = {
@@ -92,7 +93,7 @@ WSGI_APPLICATION = 'music-platform-api.wsgi.application'
 DATABASES = {
     'default': {
         'HOST': '127.0.0.1',
-        'NAME': 'mhub_db',
+        'NAME': 'music_platform_db',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'USER': 'postgres',
         'PASSWORD': 'postgres',

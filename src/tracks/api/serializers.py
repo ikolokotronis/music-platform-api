@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from tracks.models import Track
+from users.api.serializers import AccountPropertiesSerializer
 
 
 class TrackSerializer(serializers.ModelSerializer):
@@ -8,11 +9,11 @@ class TrackSerializer(serializers.ModelSerializer):
     Serializer for Track model
     """
 
-    username = serializers.SerializerMethodField('get_username_from_user')
+    user = serializers.SerializerMethodField('get_user')
 
     class Meta:
         model = Track
-        fields = ['pk', 'name', 'description', 'username', 'audio_file', 'img_file',  'created_at', 'updated_at']
+        fields = ['pk', 'name', 'description', 'user', 'audio_file', 'img_file',  'created_at', 'updated_at']
 
-    def get_username_from_user(self, track):
-        return track.user.username
+    def get_user(self, track):
+        return AccountPropertiesSerializer(track.user).data

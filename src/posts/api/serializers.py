@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from posts.models import Post
+from users.api.serializers import AccountPropertiesSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -8,12 +9,12 @@ class PostSerializer(serializers.ModelSerializer):
     Serializer for Post model
     """
 
-    username = serializers.SerializerMethodField('get_username_from_author')
+    user = serializers.SerializerMethodField('get_user_from_author')
 
     class Meta:
         model = Post
-        fields = ['pk', 'title', 'content', 'username', 'created_at', 'updated_at']
+        fields = ['pk', 'title', 'content', 'user', 'created_at', 'updated_at']
 
-    def get_username_from_author(self, post):
-        return post.author.username
+    def get_user_from_author(self, post):
+        return AccountPropertiesSerializer(post.author).data
 
