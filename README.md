@@ -20,7 +20,7 @@ This is how to make the project run locally.
    ```sh
    git clone https://github.com/ikolokotronis/music-platform-api.git
    ```
-2. Install PIP packages (inside the main directory)
+2. Install PIP packages (inside the /src directory)
    ```sh
    pip install -r requirements.txt
    ```
