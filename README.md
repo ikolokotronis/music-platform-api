@@ -1,12 +1,16 @@
 <div id="top"></div>
 
 
-
+# Music Platform API
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
 This is a REST API for a music platform with functionalities like tracks, posts, messages etc. . Note that the project is still in progress, so the endpoints will be extended and may be changed. 
+
+## Built with
+
+* [Django REST Framework](https://www.django-rest-framework.org/)
 
 
 <!-- GETTING STARTED -->
