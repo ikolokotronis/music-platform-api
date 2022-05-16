@@ -6,7 +6,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a REST API for a music platform with functionalities like tracks, posts, messages etc. . Note that the project is still in progress, so the endpoints will be extended and may be changed. 
+This is a REST API for a music platform with functionalities like tracks, posts, messages etc.  
+#### Note
+The project is still in progress, so endpoints will be extended and may be changed. 
 
 ## Built with
 
