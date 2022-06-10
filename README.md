@@ -7,10 +7,9 @@
 ## About The Project
 
 This is a REST API for a music platform with functionalities like tracks, posts, messages etc.  
-#### Note
-The project is still in progress, so endpoints will be extended and may be changed. 
 
-## Built with
+
+### Built with
 
 * [Django REST Framework](https://www.django-rest-framework.org/)
 
