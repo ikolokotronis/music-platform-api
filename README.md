@@ -1,7 +1,7 @@
 <div id="top"></div>
 
 
-# Music Platform API
+<h3 align="center">Music Platform REST API</h3>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
