@@ -4,7 +4,7 @@
 <h3 align="center">Music Platform REST API</h3>
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+### About The Project
 
 This is a REST API for a music platform with functionalities like tracks, posts, messages etc.  
 
@@ -15,11 +15,11 @@ This is a REST API for a music platform with functionalities like tracks, posts,
 
 
 <!-- GETTING STARTED -->
-## Getting Started
+### Getting Started
 
 This is how to make the project run locally.
 
-### Installation
+#### Installation
 
 1. Clone the repo
    ```sh
@@ -48,13 +48,13 @@ This is how to make the project run locally.
 
 
 <!-- ENDPOINTS -->
-## API Endpoints
+### API Endpoints
 
 <i>will be available soon</i>
 
 
 <!-- LICENSE -->
-## License
+#### License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
