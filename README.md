@@ -48,13 +48,39 @@ This is how to make the project run locally.
 
 
 <!-- ENDPOINTS -->
-### API Endpoints
+## Endpoints
 
-<i>will be available soon</i>
+### Open Endpoints
+
+Open endpoints require no Authentication.
+
+* Register : `POST /users/register/`
+* Login : `POST /users/login/`
+
+### Endpoints that require Authentication
+
+Closed endpoints require a valid Token to be included in the header of the
+request. A Token can be acquired from the Login view or the Register view.
+
+### Current User related
+
+Each endpoint manipulates or displays information related to the User whose
+Token is provided with the request:
+
+* Show info: `GET /users/properties/`
+* Update info : `PUT /users/properties/`
+
+### Account related
+
+Endpoints for viewing and manipulating the Accounts that the Authenticated User
+has permissions to access.
+
+* Show An Account : `GET /users/properties/:pk/`
+* Update An Account : `PUT /users/properties/:pk/`
 
 
 <!-- LICENSE -->
-#### License
+## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
