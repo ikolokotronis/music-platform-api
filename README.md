@@ -94,7 +94,7 @@ Endpoints for creating messages or viewing conversations that are available for 
 Single conversations
 * Show single conversation details: `GET /conversations/:pk/`
 
-Sending messages
+Messages
 * Send a message to another user: `POST /conversations/send_message/`
 
 ### Track related
