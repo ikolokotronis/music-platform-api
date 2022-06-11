@@ -89,6 +89,16 @@ Endpints for a single track
 * Update single track: `PUT /tracks/:pk/`
 * Delete single track: `DELETE /tracks/:pk/`
 
+### Post related
+Endpoints for viewing and manipulating posts.
+
+* Show post list: `GET /posts/`
+* Create new post: `POST /posts/`
+
+Endpints for a single post
+* Show single post details: `GET /posts/:pk/`
+* Update single post: `PUT /posts/:pk/`
+* Delete single post: `DELETE /posts/:pk/`
 
 <!-- LICENSE -->
 ## License
