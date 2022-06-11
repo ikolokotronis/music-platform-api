@@ -11,8 +11,8 @@ This is a REST API for a music platform with functionalities like tracks, posts,
 #### Key functionalities
 User can:
 * Create a personal account that can be updated
-* Create posts that have a crud functionality
-* Post tracks with an audio file attached, that also have a crud functionality
+* Create posts that have CRUD functionality
+* Post tracks with an audio file attached, that also have CRUD functionality
 * Send messages to other users and have conversations with them
 * View other user's account/posts/tracks
 
