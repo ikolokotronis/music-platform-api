@@ -73,10 +73,10 @@ Token is provided with the request:
 ### Account related
 
 Endpoints for viewing and manipulating the Accounts that the Authenticated User
-has permissions to access.
+has permissions to access.  
+For now it is just a GET request to view account properties of another user.
 
 * Show An Account : `GET /users/properties/:pk/`
-* Update An Account : `PUT /users/properties/:pk/`
 
 
 <!-- LICENSE -->
