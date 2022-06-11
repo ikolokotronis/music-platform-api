@@ -78,6 +78,17 @@ For now it is just a GET request to view account properties of another user.
 
 * Show An Account : `GET /users/properties/:pk/`
 
+### Track related
+Endpoints for viewing and manipulating tracks.
+
+* Show track list: `GET /tracks/`
+* Create new track: `POST /tracks/`
+
+Endpints for a single track
+* Show single track details: `GET /tracks/:pk/`
+* Update single track: `PUT /tracks/:pk/`
+* Delete single track: `DELETE /tracks/:pk/`
+
 
 <!-- LICENSE -->
 ## License
