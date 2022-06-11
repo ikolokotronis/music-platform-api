@@ -61,6 +61,7 @@ Open endpoints require no Authentication.
 
 Closed endpoints require a valid Token to be included in the header of the
 request. A Token can be acquired from the Login view or the Register view.
+All of the endpoints below require authentication.
 
 ### Current User related
 
