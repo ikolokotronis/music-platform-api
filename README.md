@@ -84,7 +84,7 @@ Endpoints for viewing and manipulating tracks.
 * Show track list: `GET /tracks/`
 * Create new track: `POST /tracks/`
 
-Endpints for a single track
+Endpoints for a single track
 * Show single track details: `GET /tracks/:pk/`
 * Update single track: `PUT /tracks/:pk/`
 * Delete single track: `DELETE /tracks/:pk/`
@@ -95,7 +95,7 @@ Endpoints for viewing and manipulating posts.
 * Show post list: `GET /posts/`
 * Create new post: `POST /posts/`
 
-Endpints for a single post
+Endpoints for a single post
 * Show single post details: `GET /posts/:pk/`
 * Update single post: `PUT /posts/:pk/`
 * Delete single post: `DELETE /posts/:pk/`
