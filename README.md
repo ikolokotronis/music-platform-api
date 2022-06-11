@@ -8,7 +8,7 @@
 
 This is a REST API for a music platform with functionalities like tracks, posts, conversations or users.  
 
-#### Functionalities
+#### Key functionalities
 User can:
 * Create a personal account that can be updated
 * Create posts that have a crud functionality
