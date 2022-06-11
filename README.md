@@ -68,11 +68,11 @@ Open endpoints require no Authentication.
 
 Closed endpoints require a valid Token to be included in the header of the
 request. A Token can be acquired from the Login view or the Register view.
-All of the endpoints below require authentication.
+All of the endpoints below require Authentication.
 
 ### Current User related
 
-Each endpoint manipulates or displays information related to the User whose
+Each endpoint displays or manipulates information related to the User whose
 Token is provided with the request:
 
 * Show info: `GET /users/properties/`
@@ -80,44 +80,45 @@ Token is provided with the request:
 
 ### Account related
 
-Endpoints for viewing and manipulating the Accounts that the Authenticated User
+Endpoints for viewing the User Accounts that the Authenticated User
 has permissions to access.  
 For now it is just a GET request to view account properties of another user.
 
 * Show account's details : `GET /users/properties/:pk/`
 
+### Conversation / Message related
+Endpoints for creating messages or viewing conversations that are available for the current user.
+
+* Show conversation list: `GET /conversations/`
+
+Single conversations
+* Show single conversation details: `GET /conversations/:pk/`
+
+Sending messages
+* Send a message to another user: `POST /conversations/send_message/`
+
 ### Track related
-Endpoints for viewing and manipulating tracks.
+Endpoints for viewing, manipulating and creating tracks.
 
 * Show track list: `GET /tracks/`
 * Create new track: `POST /tracks/`
 
-Endpoints for a single track
+Single tracks
 * Show single track details: `GET /tracks/:pk/`
 * Update single track: `PUT /tracks/:pk/`
 * Delete single track: `DELETE /tracks/:pk/`
 
 ### Post related
-Endpoints for viewing and manipulating posts.
+Endpoints for viewing, manipulating and creating posts.
 
 * Show post list: `GET /posts/`
 * Create new post: `POST /posts/`
 
-Endpoints for a single post
+Single posts
 * Show single post details: `GET /posts/:pk/`
 * Update single post: `PUT /posts/:pk/`
 * Delete single post: `DELETE /posts/:pk/`
 
-### Conversation related
-Endpoints for viewing and manipulating available conversations for the current user.
-
-* Show conversation list: `GET /conversations/`
-
-Endpoints for a single conversation
-* Show single conversation details: `GET /conversations/:pk/`
-
-Endpoints for sending messages
-* Send a message to another user: `POST /conversations/send_message/`
 
 <!-- LICENSE -->
 ## License
