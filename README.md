@@ -36,7 +36,7 @@ This is how to make the project run locally.
    ```sh
    pip install -r requirements.txt
    ```
-3. Enter your database settings in settings.py. Here is an example if you want to use PostgreSQL:
+3. Enter your database settings in settings.py. Here is an example if you want to use postgres:
    ```python
    DATABASES = {
     'default': {
