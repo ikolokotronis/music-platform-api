@@ -100,6 +100,17 @@ Endpints for a single post
 * Update single post: `PUT /posts/:pk/`
 * Delete single post: `DELETE /posts/:pk/`
 
+### Conversation related
+Endpoints for viewing and manipulating available conversations for the current user.
+
+* Show conversation list: `GET /conversations/`
+
+Endpoints for a single conversation
+* Show single conversation details: `GET /conversations/:pk/`
+
+Endpoints for sending messages
+* Send a message to another user: `POST /conversations/send_message/`
+
 <!-- LICENSE -->
 ## License
 
