@@ -14,7 +14,7 @@ User can:
 * Create posts that have a crud functionality
 * Post tracks with an audio file attached, which also have a crud functionality
 * Send messages to other users and have conversations with them
-* View other users accounts/posts/tracks
+* View other user's account/posts/tracks
 
 ### Built with
 
@@ -84,7 +84,7 @@ Endpoints for viewing and manipulating the Accounts that the Authenticated User
 has permissions to access.  
 For now it is just a GET request to view account properties of another user.
 
-* Show An Account : `GET /users/properties/:pk/`
+* Show account's details : `GET /users/properties/:pk/`
 
 ### Track related
 Endpoints for viewing and manipulating tracks.
