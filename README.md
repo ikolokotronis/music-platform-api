@@ -6,8 +6,15 @@
 <!-- ABOUT THE PROJECT -->
 ### About The Project
 
-This is a REST API for a music platform with functionalities like tracks, posts, messages etc.  
+This is a REST API for a music platform with functionalities like tracks, posts, conversations or users.  
 
+#### Functionalities
+User can:
+* Create a personal account that can be updated
+* Create posts that have a crud functionality
+* Post tracks with an audio file attached, which also have a crud functionality
+* Send messages to other users and have conversations with them
+* View other users accounts/posts/tracks
 
 ### Built with
 
