@@ -3,16 +3,11 @@
 
 <h3 align="center">Music Platform REST API</h3>
 
-<!-- ABOUT THE PROJECT -->
-### About The Project
-
-This is a REST API for a music platform with functionalities like tracks, posts, conversations or users.  
-
 #### Key functionalities
 User can:
 * Create a personal account that can be updated
-* Create posts that have CRUD functionality
-* Post tracks with an audio file attached, that also have CRUD functionality
+* Create/Read/Update/Delete posts
+* Post tracks with an audio file attached (with CRUD functionality)
 * Send messages to other users and have conversations with them
 * View other user's account/posts/tracks
 
