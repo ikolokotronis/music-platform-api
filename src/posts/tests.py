@@ -1,3 +1,13 @@
-from django.test import TestCase
+from django.test import TestCase, Client
+from django.urls import reverse
 
-# Create your tests here.
+client = Client()
+
+
+class PostViewTest(TestCase):
+    def test_should_return_401_when_auth_token_is_not_provided(self):
+        response = client.get(reverse("posts:post_view"))
+        actual_code = response.status_code
+        expected_code = 401
+        print(actual_code)
+        assert actual_code == expected_code
