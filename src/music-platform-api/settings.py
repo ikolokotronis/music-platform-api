@@ -99,16 +99,16 @@ if "test" in sys.argv:
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": "mydatabase",
     }
-
-DATABASES = {
-    "default": {
-        "HOST": config("DB_HOST"),
-        "NAME": config("DB_NAME"),
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
+elif "test" not in sys.argv:
+    DATABASES = {
+        "default": {
+            "HOST": config("DB_HOST"),
+            "NAME": config("DB_NAME"),
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "USER": config("DB_USER"),
+            "PASSWORD": config("DB_PASSWORD"),
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
