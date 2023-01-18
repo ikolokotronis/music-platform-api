@@ -9,5 +9,4 @@ class PostViewTest(TestCase):
         response = client.get(reverse("posts:post_view"))
         actual_code = response.status_code
         expected_code = 401
-        print(actual_code)
         assert actual_code == expected_code
