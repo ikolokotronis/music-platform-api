@@ -45,5 +45,4 @@ class PostViewTest(TestCase):
         )
         actual_code = response.status_code
         expected_code = 200
-        print(actual_code)
         assert actual_code == expected_code
