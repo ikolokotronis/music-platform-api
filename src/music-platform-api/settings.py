@@ -66,7 +66,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = config("APP_ROOT_URLCONF")
+ROOT_URLCONF = "music-platform-api.urls"
 
 TEMPLATES = [
     {
