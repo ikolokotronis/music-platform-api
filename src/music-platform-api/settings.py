@@ -92,6 +92,14 @@ WSGI_APPLICATION = "music-platform-api.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+DATABASES = {}
+
+if "test" in sys.argv:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "mydatabase",
+    }
+
 DATABASES = {
     "default": {
         "HOST": config("DB_HOST"),
@@ -101,13 +109,6 @@ DATABASES = {
         "PASSWORD": config("DB_PASSWORD"),
     }
 }
-
-if "test" in sys.argv:
-    DATABASES["default"] = {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
