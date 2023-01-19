@@ -11,6 +11,7 @@ class TrackView(APIView):
     """
     List all tracks, or creates a new track.
     """
+
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -22,7 +23,7 @@ class TrackView(APIView):
         """
         tracks = Track.objects.all()
         serializer = TrackSerializer(tracks, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
         """
@@ -41,6 +42,7 @@ class TrackDetailView(APIView):
     """
     Retrieve, update or delete a track instance.
     """
+
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -59,17 +61,18 @@ class TrackDetailView(APIView):
         """
         track = self.get_object(pk)
         serializer = TrackSerializer(track)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if track:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         """
         Updates a track.
         """
         track = self.get_object(pk)
-
         if track.user != request.user:
-            return Response({'Access forbidden'}, status=status.HTTP_401_UNAUTHORIZED)
-
+            data = {"error": "Request user is not the author of track"}
+            return Response(data, status=status.HTTP_401_UNAUTHORIZED)
         serializer = TrackSerializer(track, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -83,9 +86,10 @@ class TrackDetailView(APIView):
         track = self.get_object(pk)
 
         if track.user != request.user:
-            return Response({'Access forbidden'}, status=status.HTTP_401_UNAUTHORIZED)
+            data = {"error": "Request user is not the author of track"}
+            return Response(data, status=status.HTTP_401_UNAUTHORIZED)
 
         operation = track.delete()
         if operation:
-            return Response({'Deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
-        return Response({'Deletion failed'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"Deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"Delete failed"}, status=status.HTTP_400_BAD_REQUEST)

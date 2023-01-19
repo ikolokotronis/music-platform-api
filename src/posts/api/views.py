@@ -14,7 +14,7 @@ class PostView(APIView):
         """
         queryset = Post.objects.all()
         serializer = PostSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
         """
@@ -48,7 +48,9 @@ class PostDetailView(APIView):
         """
         post = self.get_object(pk)
         serializer = PostSerializer(post)
-        return Response(serializer.data)
+        if post:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         """
@@ -57,7 +59,7 @@ class PostDetailView(APIView):
         post = self.get_object(pk)
 
         if post.author != request.user:
-            return Response({'Access forbidden'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({"Access forbidden"}, status=status.HTTP_403_FORBIDDEN)
 
         serializer = PostSerializer(post, data=request.data)
         if serializer.is_valid():
@@ -70,14 +72,14 @@ class PostDetailView(APIView):
         Delete post
         """
         post = self.get_object(pk)
-
+        data = {}
         if post.author != request.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
+            data["error"] = "Request user is not the author of post"
+            return Response(data, status=status.HTTP_403_FORBIDDEN)
 
         operation = post.delete()
-        data = {}
         if operation:
-            data['success'] = 'Delete successful'
+            data["success"] = "Delete successful"
             return Response(data=data, status=status.HTTP_200_OK)
-        data['error'] = 'Delete failed'
-        return Response(data=data, status=status.HTTP_204_NO_CONTENT)
+        data["error"] = "Delete failed"
+        return Response(data=data, status=status.HTTP_400_BAD_REQUEST)
