@@ -4,15 +4,15 @@
 <h3 align="center">Music Platform REST API</h3>
 
 #### Key functionalities
-User can:
-* Create a personal account that can be updated
-* Create/Read/Update/Delete posts
-* Post tracks with an audio file attached (with CRUD functionality)
-* Send messages to other users and have conversations with them
-* View other user's account/posts/tracks
+* Create and manage a personal account
+* CRUD posts 
+* CRUD tracks with an audio file attached
+* Have conversations with other users
+* View other accounts/posts/tracks
 
 ### Built with
 
+* [Django](https://www.djangoproject.com/)
 * [Django REST Framework](https://www.django-rest-framework.org/)
 
 
