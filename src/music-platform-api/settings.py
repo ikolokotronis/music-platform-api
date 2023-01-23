@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import sys
 from pathlib import Path
-from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("APP_SECRET_KEY")
+SECRET_KEY = os.environ["APP_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -98,11 +97,12 @@ if "test" in sys.argv:
 else:
     DATABASES = {
         "default": {
-            "HOST": config("DB_HOST"),
-            "NAME": config("DB_NAME"),
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "USER": config("DB_USER"),
-            "PASSWORD": config("DB_PASSWORD"),
+            "HOST": os.environ["DB_HOST"],
+            "NAME": os.environ["DB_NAME"],
+            "ENGINE": "django.db.backends.postgresql",
+            "USER": os.environ["POSTGRES_USER"],
+            "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+            "PORT": 5432,
         }
     }
 
