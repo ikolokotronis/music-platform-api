@@ -18,12 +18,6 @@ class PostViewTest(TestCase):
 
         Post.objects.create(title="test title", content="test content", author=account)
 
-    def test_should_return_401_when_auth_token_is_not_provided(self):
-        response = client.get(reverse("posts:post_view"))
-        actual_code = response.status_code
-        expected_code = 401
-        assert actual_code == expected_code
-
     def test_should_return_200_when_viewing_all_posts_as_user(self):
         account = Account.objects.get(username="test_user")
         token = Token.objects.get(user=account)

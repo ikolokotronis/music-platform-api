@@ -18,14 +18,14 @@ class RegistrationView(APIView):
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['response'] = 'Successfully registered new user.'
-            data['email'] = account.email
-            data['username'] = account.username
+            data["response"] = "Successfully registered new user."
+            data["email"] = account.email
+            data["username"] = account.username
             token = Token.objects.get(user=account).key
-            data['token'] = token
-        else:
-            data = serializer.errors
-        return Response(data)
+            data["token"] = token
+            return Response(data, status=status.HTTP_200_OK)
+        data["error"] = "Registration failed"
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AccountView(APIView):
@@ -39,9 +39,13 @@ class AccountView(APIView):
         try:
             user = Account.objects.get(pk=pk)
         except Account.DoesNotExist:
-            return Response({"Account with this pk doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"Account with this pk doesn't exist"}, status=status.HTTP_404_NOT_FOUND
+            )
         serializer = AccountPropertiesSerializer(user)
-        return Response(serializer.data)
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         """
@@ -52,17 +56,17 @@ class AccountView(APIView):
         except Account.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
         user_from_url = Account.objects.get(pk=pk)
+        data = {}
         if user_from_url != request.user:
-            return Response({'Access forbidden'}, status=status.HTTP_403_FORBIDDEN)
+            data["error"] = "Request user is not the account owner"
+            return Response(data, status=status.HTTP_403_FORBIDDEN)
 
         serializer = AccountPropertiesSerializer(user, data=request.data)
-        data = {}
         if serializer.is_valid():
             serializer.save()
-            new_password = serializer.validated_data['new_password']
-            if new_password != '':
+            new_password = serializer.validated_data["new_password"]
+            if new_password != "":
                 user.set_password(new_password)
                 user.save()
-            data['response'] = 'Account update success.'
-            return Response(data=data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
