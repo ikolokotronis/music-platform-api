@@ -90,7 +90,7 @@ Single conversations
 * Show single conversation details: `GET /conversations/:pk/`
 
 Messages
-* Send a message to another user: `POST /conversations/messages/send/`
+* Send a message to another user: `POST /conversations/messages/`
 
 ### Track related
 Endpoints for viewing, manipulating and creating tracks.
