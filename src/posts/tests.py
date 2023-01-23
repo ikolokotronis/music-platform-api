@@ -26,6 +26,7 @@ class PostViewTest(TestCase):
             reverse("posts:post_view"), HTTP_AUTHORIZATION=f"Token {key}"
         )
         actual_code = response.status_code
+        print(actual_code)
         expected_code = 200
         assert actual_code == expected_code
 
