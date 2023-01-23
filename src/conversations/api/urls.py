@@ -15,14 +15,16 @@ Including another URLconf
 """
 from django.urls import path
 
-from conversations.api.views import ConversationView, ConversationDetailView, MessageSender
+from conversations.api.views import (
+    ConversationView,
+    ConversationDetailView,
+    MessageView,
+)
 
-app_name = 'conversations'
+app_name = "conversations"
 
 urlpatterns = [
-    path('', ConversationView.as_view(), name='conversations_list'),
-    path('<int:pk>/', ConversationDetailView.as_view(), name='conversations_detail'),
-    path('send_message/', MessageSender.as_view(), name='send_message'),
+    path("", ConversationView.as_view(), name="conversations_list"),
+    path("<int:pk>/", ConversationDetailView.as_view(), name="conversations_detail"),
+    path("messages/", MessageView.as_view(), name="messages"),
 ]
-
-
