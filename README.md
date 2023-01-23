@@ -24,29 +24,18 @@ This is how to make the project run locally.
 #### Installation
 
 1. Clone the repo
-   ```sh
-   git clone https://github.com/ikolokotronis/music-platform-api.git
-   ```
-2. Install PIP packages (inside the /src directory)
-   ```sh
-   pip install -r requirements.txt
-   ```
-3. Enter your database settings in settings.py. Here is an example if you want to use postgreSQL:
-   ```python
-   DATABASES = {
-    'default': {
-        'HOST': '127.0.0.1',
-        'NAME': 'db_name_here',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'user_name_here',
-        'PASSWORD': 'password_here',
-    }
-    }
-   ```   
-4. Run the server
-   ```sh
-   python manage.py runserver
-   ```
+  ```
+  git clone https://github.com/ikolokotronis/music-platform-api.git
+  ```
+2. Move to docker directory (assuming you are located in the project's root directory)
+  ```
+  cd ./src/.docker/
+  ```
+3. Build the container
+  ```
+  docker-compose up --build
+  ```
+4. Now you can access the API at http://127.0.0.1:8080
 
 
 <!-- ENDPOINTS -->
