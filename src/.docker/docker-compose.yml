@@ -12,9 +12,9 @@ services:
         - |
           python manage.py makemigrations
           python manage.py migrate
-          python manage.py runserver 0.0.0.0:8000
+          python manage.py runserver 0.0.0.0:${API_INTERNAL_PORT}
       ports:
-        - "8080:8000"
+        - "${API_EXTERNAL_PORT}:${API_INTERNAL_PORT}"
       depends_on:
         db:
           condition: service_healthy
