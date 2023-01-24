@@ -23,7 +23,7 @@ class RegistrationView(APIView):
             data["username"] = account.username
             token = Token.objects.get(user=account).key
             data["token"] = token
-            return Response(data, status=status.HTTP_200_OK)
+            return Response(data, status=status.HTTP_201_CREATED)
         data["error"] = "Registration failed"
         return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
