@@ -18,6 +18,22 @@ class PostViewTest(TestCase):
 
         Post.objects.create(title="test title", content="test content", author=account)
 
+    def test_should_return_201_when_creating_post_as_user(self):
+        account = Account.objects.get(username="test_user")
+        token = Token.objects.get(user=account)
+        key = token.key
+        data = {
+            "title": "some_title",
+            "content": "some_content",
+            "user": 0,
+        }
+        response = client.post(
+            reverse("posts:post_view"), data, HTTP_AUTHORIZATION=f"Token {key}"
+        )
+        actual_code = response.status_code
+        expected_code = 201
+        assert actual_code == expected_code
+
     def test_should_return_200_when_viewing_all_posts_as_user(self):
         account = Account.objects.get(username="test_user")
         token = Token.objects.get(user=account)
@@ -26,7 +42,6 @@ class PostViewTest(TestCase):
             reverse("posts:post_view"), HTTP_AUTHORIZATION=f"Token {key}"
         )
         actual_code = response.status_code
-        print(actual_code)
         expected_code = 200
         assert actual_code == expected_code
 

@@ -22,7 +22,7 @@ class MessageViewTest(TestCase):
         account2.set_password("test_password2")
         account2.save()
 
-    def test_should_return_200_when_sending_a_valid_message_to_other_user(self):
+    def test_should_return_201_when_sending_a_valid_message_to_other_user(self):
         account = Account.objects.get(username="test_user")
         token = Token.objects.get(user=account)
         key = token.key
@@ -31,7 +31,7 @@ class MessageViewTest(TestCase):
             reverse("conversations:messages"), data, HTTP_AUTHORIZATION=f"Token {key}"
         )
         actual_code = response.status_code
-        expected_code = 200
+        expected_code = 201
         assert actual_code == expected_code
 
     def test_should_return_400_when_sending_a_message_to_not_existing_user(self):
